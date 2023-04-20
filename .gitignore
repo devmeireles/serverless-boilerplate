@@ -1,0 +1,6 @@
+node_modules
+.serverless
+env.yml
+.env
+.webpack
+test/coverage

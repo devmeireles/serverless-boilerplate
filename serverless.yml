@@ -1,0 +1,24 @@
+service: serverless-boilerplate
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+custom:
+  webpack:
+    excludeFiles: "./test/*.ts"
+    packager: npm
+    includeModules:
+      packagePath: "./package.json"
+  
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  createInteraction:
+    handler: src/modules/interaction/handler.createInteraction
+    events:
+      - http:
+          path: interactions
+          method: post
