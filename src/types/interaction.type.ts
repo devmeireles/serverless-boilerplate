@@ -1,4 +1,4 @@
-import { Default } from "./default.type";
+import { Default } from './default.type';
 
 export default interface Interaction extends Default {
   title: string;

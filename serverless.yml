@@ -1,24 +1,76 @@
 service: serverless-boilerplate
 
+useDotenv: true
+
 plugins:
   - serverless-webpack
   - serverless-offline
 
 custom:
+  stage: ${opt:stage, self:provider.stage, 'dev'}
+  environment: ${file(./env.yml):${self:custom.stage}, file(./env.yml):default}
   webpack:
     excludeFiles: "./test/*.ts"
     packager: npm
     includeModules:
       packagePath: "./package.json"
-  
+      
 provider:
   name: aws
   runtime: nodejs14.x
+  environment:
+    stage: ${self:custom.stage}
+    AWS_DYNAMO_ACCESS_KEY: ${self:custom.environment.AWS_DYNAMO_ACCESS_KEY}
+    AWS_DYNAMO_SECRET_KEY: ${self:custom.environment.AWS_DYNAMO_SECRET_KEY}
+    MAIN_TABLE: ${self:custom.environment.MAIN_TABLE}
+
+resources:
+  Resources:
+    MainTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: PK
+            AttributeType: S
+          - AttributeName: SK
+            AttributeType: S
+        KeySchema:
+          - AttributeName: PK
+            KeyType: HASH
+          - AttributeName: SK
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
 
 functions:
   createInteraction:
-    handler: src/modules/interaction/handler.createInteraction
+    handler: src/modules/interaction/handler.create
     events:
       - http:
           path: interactions
           method: post
+  getInteractions:
+    handler: src/modules/interaction/handler.findAll
+    events:
+      - http:
+          path: interactions
+          method: get
+  getInteraction:
+    handler: src/modules/interaction/handler.findOne
+    events:
+      - http:
+          path: interactions/{id}
+          method: get
+  updateInteraction:
+    handler: src/modules/interaction/handler.update
+    events:
+      - http:
+          path: interactions/{id}
+          method: put
+  removeInteraction:
+    handler: src/modules/interaction/handler.remove
+    events:
+      - http:
+          path: interactions/{id}
+          method: delete

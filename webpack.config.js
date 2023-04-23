@@ -9,7 +9,7 @@ module.exports = {
     extensions: ['.ts', 'tsx'],
     alias: {
       '@': path.resolve(__dirname, 'src'),
-    }
+    },
   },
   target: 'node',
   externals: [nodeExternals()],

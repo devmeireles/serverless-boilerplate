@@ -1,0 +1,38 @@
+service: serverless-boilerplate-database
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  region: eu-west-1
+  MAIN_TABLE_NAME: ${self:custom.stage}-maintable
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: ${self:custom.region}
+
+resources:
+  Resources:
+    MainServerlessBoilerplateTable:
+      Type: "AWS::DynamoDB::Table"
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: PK
+            AttributeType: S
+          - AttributeName: SK
+            AttributeType: S
+        KeySchema:
+          - AttributeName: PK
+            KeyType: HASH
+          - AttributeName: SK
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:custom.MAIN_TABLE_NAME}
+  Outputs:
+    MainServerlessBoilerplateTableArn:
+      Value:
+        Fn::GetAtt:
+          - MainServerlessBoilerplateTable
+          - Arn
+      Export:
+        Name: ${self:custom.stage}-MainServerlessBoilerplateTableArn

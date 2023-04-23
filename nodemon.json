@@ -1,12 +1,6 @@
 {
-  "ignore": [
-    "**/*.test.ts",
-    "**/*.spec.ts",
-    "node_modules"
-  ],
-  "watch": [
-    "src"
-  ],
+  "ignore": ["**/*.test.ts", "**/*.spec.ts", "node_modules"],
+  "watch": ["src"],
   "exec": "serverless offline start",
   "ext": "ts"
 }

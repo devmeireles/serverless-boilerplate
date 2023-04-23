@@ -1,0 +1,12 @@
+**/dist
+.webpack
+**/coverage
+**/.nyc_output
+.github
+.all-contributorsrc
+.cache
+.nyc_output
+CONTRIBUTORS.md
+CHANGELOG.md
+.stryker-tmp
+/reports/
