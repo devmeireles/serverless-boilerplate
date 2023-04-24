@@ -7,6 +7,8 @@
     "start:dev": "nodemon",
     "lint:fix": "npx eslint . --fix --ext .ts",
     "format:fix": "npx prettier --write \"./**/*.{ts,js,json,md}\"",
+    "test": "jest --projects ./test --runInBand",
+    "test:coverage": "jest --projects ./test --runInBand --coverage",
     "deploy:database:dev": "cd ./resources/database && serverless deploy --aws-profile serverless-boilerplate --stage dev",
     "deploy:database:stage": "cd ./resources/database && serverless deploy --aws-profile serverless-boilerplate --stage stage",
     "deploy:database:prod": "cd ./resources/database && serverless deploy --aws-profile serverless-boilerplate --stage prod"
@@ -15,7 +17,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@types/aws-lambda": "^8.10.114",
+    "@types/jest": "^29.5.1",
     "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",

@@ -59,5 +59,5 @@ export const update = handler(
 
 export const remove = handler(async (event: APIGatewayEvent): Promise<void> => {
   const id = event.pathParameters.id;
-  interactionService.remove(id);
+  await interactionService.remove(id);
 });

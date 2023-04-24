@@ -24,17 +24,13 @@ const create = async (data: CreateInteractionDTO): Promise<Interaction> => {
 };
 
 const findAll = async (): Promise<Interaction[]> => {
-  try {
-    const data = (
-      await dynamo.scan({
-        TableName,
-      })
-    ).Items as Interaction[];
+  const data = (
+    await dynamo.scan({
+      TableName,
+    })
+  ).Items as Interaction[];
 
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
+  return data;
 };
 
 const findOne = async (id: string): Promise<Interaction> => {

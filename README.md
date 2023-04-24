@@ -3,6 +3,7 @@
 - [Preamble](#preamble)
 - [Stack](#stack)
 - [Install](#install)
+- [Test](#test)
 
 ## Preamble
 
@@ -26,7 +27,6 @@ serverless config credentials \
 --key AKIAIOSFODNN7EXAMPLE \
 --secret wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 ```
-
 
 For more datails please take a look on [Serverless Oficial Documentation](https://www.serverless.com/framework/docs/providers/aws/guide/credentials/) <br /> <br />
 
@@ -61,8 +61,7 @@ AWS_DYNAMO_ACCESS_KEY=AKIAIO6S8E3BA1EXAMPLE
 AWS_DYNAMO_SECRET_KEY=xA2GwIdjqfm4Jc97DDbFRa8rOwD2pnfrEXAMPLEKEY
 ```
 
-*All interactions on dev / test environment reflect changes on database, so be aware when setting the **MAIN_TABLE** value*
-
+_All interactions on dev / test environment reflect changes on database, so be aware when setting the **MAIN_TABLE** value_
 
 <br />
 
@@ -117,6 +116,27 @@ Finally you need to deploy at least the dev database to be able to run the appli
 </table>
 
 To deploy an initial database for dev environment:
+
 ```
 npm run deploy:database:dev
+```
+
+## Test
+
+You can run test cases easily using Jest
+
+<br />
+
+To test with coverage results (you can see the results on `test/coverage`):
+
+```
+npm run test:coverage
+```
+
+<br />
+
+To test without coverage:
+
+```
+npm run test
 ```
